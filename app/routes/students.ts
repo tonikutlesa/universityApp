@@ -4,7 +4,7 @@ import {
   getStudents,
   updateStudent,
   deleteStudent,
-} from "../controllers/todos";
+} from "../controllers/student";
 import { exampleMiddleware } from "../middlewares/exampleMiddleware";
 
 const router = Router();
