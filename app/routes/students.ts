@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {
   createStudent,
-  getStudents,
+  getAllStudents,
   updateStudent,
   deleteStudent,
 } from "../controllers/student";
@@ -11,7 +11,7 @@ const router = Router();
 
 router.post("/", createStudent);
 
-router.get("/", exampleMiddleware, getStudents);
+router.get("/", exampleMiddleware, getAllStudents);
 
 router.patch("/:id", updateStudent);
 

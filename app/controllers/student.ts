@@ -1,10 +1,7 @@
-import { errorMonitor } from "events";
 import { RequestHandler } from "express";
 import { Student } from "../models/student";
 
 import { DI } from "../server";
-
-const STUDENTS: Student[] = [];
 
 export const createStudent: RequestHandler = async (req, res, next) => {
   if (!req.body.name) {
@@ -19,55 +16,40 @@ export const createStudent: RequestHandler = async (req, res, next) => {
   } catch (error: any) {
     return res.status(400).json({ message: error.message });
   }
-
-  // const name = (req.body as { name: string }).name;
-  // const newStudent = new Student(Math.random().toString(), name);
-
-  // STUDENTS.push(newStudent);
-
-  // res
-  //   .status(201)
-  //   .json({ message: "Created student.", createdStudent: newStudent });
 };
 
-export const getStudents: RequestHandler = (req, res, next) => {
-  res.json({ students: STUDENTS });
+export const getAllStudents: RequestHandler = async (req, res, next) => {
+  const students = await DI.studentRepository.findAll();
+
+  res.status(200).json(students);
 };
 
-export const updateStudent: RequestHandler<{ id: string }> = (
-  req,
-  res,
-  next
-) => {
-  const studentId = req.params.id;
+export const updateStudent: RequestHandler = async (req, res, next) => {
+  const id = req.params.id;
 
-  const updatedName = (req.body as { name: string }).name;
+  try {
+    const studentToUpdate = await DI.em.findOneOrFail(Student, { id: id });
+    studentToUpdate.name = req.body.name;
 
-  const studentIndex = STUDENTS.findIndex(
-    (student) => student.id === studentId
-  );
-
-  if (studentIndex < 0) {
-    throw new Error("Could not find todo!");
+    await DI.em.persist(studentToUpdate).flush();
+  } catch (error: any) {
+    return res.status(400).json({ message: error.message });
   }
 
-  STUDENTS[studentIndex] = new Student(STUDENTS[studentIndex].id, updatedName);
-
-  res.json({ message: "Updated!", updatedStudent: STUDENTS[studentIndex] });
+  res.json({ message: "Updated!" });
 };
 
-export const deleteStudent: RequestHandler = (req, res, next) => {
-  const studentId = req.params.id;
+export const deleteStudent: RequestHandler = async (req, res, next) => {
+  try {
+    const studentToRemove = await DI.em.findOneOrFail(Student, {
+      id: req.params.id,
+    });
 
-  const studentIndex = STUDENTS.findIndex(
-    (student) => student.id === studentId
-  );
-
-  if (studentIndex < 0) {
-    throw new Error("Could not find todo!");
+    await DI.studentRepository.remove(studentToRemove).flush();
+    res
+      .status(200)
+      .json({ message: `User with id: ${req.params.id} deleted.` });
+  } catch (error: any) {
+    return res.status(400).json({ message: error.message });
   }
-
-  STUDENTS.splice(studentIndex, 1);
-
-  res.json({ message: "Student deleted!" });
 };

@@ -9,7 +9,8 @@ export class Student {
   @Property()
   public name: string;
 
-  constructor(name: string) {
+  constructor(id: number, name: string) {
+    this.id = id;
     this.name = name;
   }
 }
