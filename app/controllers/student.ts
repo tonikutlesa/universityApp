@@ -31,7 +31,7 @@ export const updateStudent: RequestHandler = async (req, res, next) => {
     const studentToUpdate = await DI.em.findOneOrFail(Student, { id: id });
     studentToUpdate.name = req.body.name;
 
-    await DI.em.persist(studentToUpdate).flush();
+    await DI.em.flush();
   } catch (error: any) {
     return res.status(400).json({ message: error.message });
   }
