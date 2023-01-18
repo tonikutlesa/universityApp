@@ -1,18 +1,33 @@
+import { errorMonitor } from "events";
 import { RequestHandler } from "express";
-
 import { Student } from "../models/student";
+
+import { DI } from "../server";
 
 const STUDENTS: Student[] = [];
 
-export const createStudent: RequestHandler = (req, res, next) => {
-  const name = (req.body as { name: string }).name;
-  const newStudent = new Student(Math.random().toString(), name);
+export const createStudent: RequestHandler = async (req, res, next) => {
+  if (!req.body.name) {
+    res.status(400).json({ message: "Name is missing" });
+  }
 
-  STUDENTS.push(newStudent);
+  try {
+    const student = DI.studentRepository.create(req.body);
+    await DI.studentRepository.persist(student).flush();
 
-  res
-    .status(201)
-    .json({ message: "Created student.", createdStudent: newStudent });
+    res.json(student);
+  } catch (error: any) {
+    return res.status(400).json({ message: error.message });
+  }
+
+  // const name = (req.body as { name: string }).name;
+  // const newStudent = new Student(Math.random().toString(), name);
+
+  // STUDENTS.push(newStudent);
+
+  // res
+  //   .status(201)
+  //   .json({ message: "Created student.", createdStudent: newStudent });
 };
 
 export const getStudents: RequestHandler = (req, res, next) => {
