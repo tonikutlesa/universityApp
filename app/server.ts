@@ -8,13 +8,13 @@ import {
   MikroORM,
   RequestContext,
 } from "@mikro-orm/core";
-import { Student } from "./entities/Student";
+//import { Student } from "./entities/Student";
 
 export const DI = {} as {
   server: http.Server;
   orm: MikroORM;
   em: EntityManager;
-  studentRepository: EntityRepository<Student>;
+  //studentRepository: EntityRepository<Student>;
 };
 
 dotenv.config();
@@ -25,7 +25,7 @@ const port = process.env.PORT;
 export const init = (async () => {
   DI.orm = await MikroORM.init();
   DI.em = DI.orm.em;
-  DI.studentRepository = DI.orm.em.getRepository(Student);
+  //DI.studentRepository = DI.orm.em.getRepository(Student);
 
   app.use(express.json());
   app.use((req, res, next) => RequestContext.create(DI.orm.em, next));

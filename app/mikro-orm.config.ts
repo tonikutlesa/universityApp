@@ -1,9 +1,9 @@
 import { Options } from "@mikro-orm/core";
-import { Student } from "./entities/Student";
+//import { Student } from "./entities/Student";
 
 const options: Options = {
   type: "postgresql",
-  entities: [Student],
+  entities: [],
   user: "postgres",
   password: "postgres",
   dbName: "db_mikro",
