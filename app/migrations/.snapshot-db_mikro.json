@@ -1,0 +1,538 @@
+{
+  "namespaces": [
+    "public"
+  ],
+  "name": "public",
+  "tables": [
+    {
+      "columns": {
+        "deparment_id": {
+          "name": "deparment_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(30)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 30,
+          "mappedType": "string"
+        }
+      },
+      "name": "departments",
+      "schema": "public",
+      "indexes": [
+        {
+          "keyName": "departments_pkey",
+          "columnNames": [
+            "deparment_id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {}
+    },
+    {
+      "columns": {
+        "major_id": {
+          "name": "major_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(30)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 30,
+          "mappedType": "string"
+        }
+      },
+      "name": "majors",
+      "schema": "public",
+      "indexes": [
+        {
+          "keyName": "majors_pkey",
+          "columnNames": [
+            "major_id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {}
+    },
+    {
+      "columns": {
+        "professor_id": {
+          "name": "professor_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(30)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 30,
+          "mappedType": "string"
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(30)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 30,
+          "mappedType": "string"
+        },
+        "address": {
+          "name": "address",
+          "type": "varchar(30)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 30,
+          "mappedType": "string"
+        },
+        "phone_number": {
+          "name": "phone_number",
+          "type": "varchar(15)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 15,
+          "mappedType": "string"
+        },
+        "deparment_id": {
+          "name": "deparment_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        }
+      },
+      "name": "professors",
+      "schema": "public",
+      "indexes": [
+        {
+          "keyName": "professors_pkey",
+          "columnNames": [
+            "professor_id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "professors_deparment_id_foreign": {
+          "constraintName": "professors_deparment_id_foreign",
+          "columnNames": [
+            "deparment_id"
+          ],
+          "localTableName": "public.professors",
+          "referencedColumnNames": [
+            "deparment_id"
+          ],
+          "referencedTableName": "public.departments",
+          "updateRule": "cascade"
+        }
+      }
+    },
+    {
+      "columns": {
+        "course_id": {
+          "name": "course_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(30)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 30,
+          "mappedType": "string"
+        },
+        "ects": {
+          "name": "ects",
+          "type": "int",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "professor_id": {
+          "name": "professor_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        }
+      },
+      "name": "courses",
+      "schema": "public",
+      "indexes": [
+        {
+          "keyName": "courses_pkey",
+          "columnNames": [
+            "course_id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "courses_professor_id_foreign": {
+          "constraintName": "courses_professor_id_foreign",
+          "columnNames": [
+            "professor_id"
+          ],
+          "localTableName": "public.courses",
+          "referencedColumnNames": [
+            "professor_id"
+          ],
+          "referencedTableName": "public.professors",
+          "updateRule": "cascade"
+        }
+      }
+    },
+    {
+      "columns": {
+        "exam_id": {
+          "name": "exam_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(30)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 30,
+          "mappedType": "string"
+        },
+        "exam_datetime": {
+          "name": "exam_datetime",
+          "type": "timestamptz(6)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 6,
+          "mappedType": "datetime"
+        },
+        "course_id": {
+          "name": "course_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        }
+      },
+      "name": "exams",
+      "schema": "public",
+      "indexes": [
+        {
+          "keyName": "exams_pkey",
+          "columnNames": [
+            "exam_id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "exams_course_id_foreign": {
+          "constraintName": "exams_course_id_foreign",
+          "columnNames": [
+            "course_id"
+          ],
+          "localTableName": "public.exams",
+          "referencedColumnNames": [
+            "course_id"
+          ],
+          "referencedTableName": "public.courses",
+          "updateRule": "cascade"
+        }
+      }
+    },
+    {
+      "columns": {
+        "student_id": {
+          "name": "student_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(30)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 30,
+          "mappedType": "string"
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(30)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 30,
+          "mappedType": "string"
+        },
+        "address": {
+          "name": "address",
+          "type": "varchar(30)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 30,
+          "mappedType": "string"
+        },
+        "phone_number": {
+          "name": "phone_number",
+          "type": "varchar(15)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 15,
+          "mappedType": "string"
+        },
+        "major_id": {
+          "name": "major_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        }
+      },
+      "name": "students",
+      "schema": "public",
+      "indexes": [
+        {
+          "keyName": "students_pkey",
+          "columnNames": [
+            "student_id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "students_major_id_foreign": {
+          "constraintName": "students_major_id_foreign",
+          "columnNames": [
+            "major_id"
+          ],
+          "localTableName": "public.students",
+          "referencedColumnNames": [
+            "major_id"
+          ],
+          "referencedTableName": "public.majors",
+          "updateRule": "cascade"
+        }
+      }
+    },
+    {
+      "columns": {
+        "student_id": {
+          "name": "student_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "exam_id": {
+          "name": "exam_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "grade": {
+          "name": "grade",
+          "type": "int",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "integer"
+        }
+      },
+      "name": "results",
+      "schema": "public",
+      "indexes": [
+        {
+          "keyName": "results_pkey",
+          "columnNames": [
+            "student_id",
+            "exam_id"
+          ],
+          "composite": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "results_student_id_foreign": {
+          "constraintName": "results_student_id_foreign",
+          "columnNames": [
+            "student_id"
+          ],
+          "localTableName": "public.results",
+          "referencedColumnNames": [
+            "student_id"
+          ],
+          "referencedTableName": "public.students",
+          "updateRule": "cascade"
+        },
+        "results_exam_id_foreign": {
+          "constraintName": "results_exam_id_foreign",
+          "columnNames": [
+            "exam_id"
+          ],
+          "localTableName": "public.results",
+          "referencedColumnNames": [
+            "exam_id"
+          ],
+          "referencedTableName": "public.exams",
+          "updateRule": "cascade"
+        }
+      }
+    },
+    {
+      "columns": {
+        "student_id": {
+          "name": "student_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "course_id": {
+          "name": "course_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        }
+      },
+      "name": "enrollments",
+      "schema": "public",
+      "indexes": [
+        {
+          "keyName": "enrollments_pkey",
+          "columnNames": [
+            "student_id",
+            "course_id"
+          ],
+          "composite": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "enrollments_student_id_foreign": {
+          "constraintName": "enrollments_student_id_foreign",
+          "columnNames": [
+            "student_id"
+          ],
+          "localTableName": "public.enrollments",
+          "referencedColumnNames": [
+            "student_id"
+          ],
+          "referencedTableName": "public.students",
+          "updateRule": "cascade"
+        },
+        "enrollments_course_id_foreign": {
+          "constraintName": "enrollments_course_id_foreign",
+          "columnNames": [
+            "course_id"
+          ],
+          "localTableName": "public.enrollments",
+          "referencedColumnNames": [
+            "course_id"
+          ],
+          "referencedTableName": "public.courses",
+          "updateRule": "cascade"
+        }
+      }
+    }
+  ]
+}
