@@ -1,10 +1,9 @@
-import { Entity, ManyToOne, PrimaryKey, Property } from '@mikro-orm/core';
-import { Majors } from './Majors';
+import { Entity, ManyToOne, PrimaryKey, Property } from "@mikro-orm/core";
+import { Majors } from "./Majors";
 
 @Entity()
 export class Students {
-
-  @PrimaryKey({ columnType: 'uuid' })
+  @PrimaryKey({ columnType: "uuid" })
   studentId!: string;
 
   @Property({ length: 30 })
@@ -19,7 +18,6 @@ export class Students {
   @Property({ length: 15 })
   phoneNumber!: string;
 
-  @ManyToOne({ entity: () => Majors, fieldName: 'major_id' })
+  @ManyToOne({ entity: () => Majors, fieldName: "major_id" })
   majorId!: Majors;
-
 }

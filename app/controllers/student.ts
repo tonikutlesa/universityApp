@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { Student } from "../models/student";
+import { Students } from "../entities/Students";
 
 import { DI } from "../server";
 
@@ -9,8 +9,8 @@ export const createStudent: RequestHandler = async (req, res, next) => {
   }
 
   try {
-    const student = DI.studentRepository.create(req.body);
-    await DI.studentRepository.persist(student).flush();
+    const student = DI.studentsRepository.create(req.body);
+    await DI.studentsRepository.persist(student).flush();
 
     res.json(student);
   } catch (error: any) {
@@ -19,37 +19,15 @@ export const createStudent: RequestHandler = async (req, res, next) => {
 };
 
 export const getAllStudents: RequestHandler = async (req, res, next) => {
-  const students = await DI.studentRepository.findAll();
+  const students = await DI.studentsRepository.findAll();
 
   res.status(200).json(students);
 };
 
 export const updateStudent: RequestHandler = async (req, res, next) => {
-  const id = req.params.id;
-
-  try {
-    const studentToUpdate = await DI.em.findOneOrFail(Student, { id: id });
-    studentToUpdate.name = req.body.name;
-
-    await DI.em.flush();
-  } catch (error: any) {
-    return res.status(400).json({ message: error.message });
-  }
-
   res.json({ message: "Updated!" });
 };
 
 export const deleteStudent: RequestHandler = async (req, res, next) => {
-  try {
-    const studentToRemove = await DI.em.findOneOrFail(Student, {
-      id: req.params.id,
-    });
-
-    await DI.studentRepository.remove(studentToRemove).flush();
-    res
-      .status(200)
-      .json({ message: `User with id: ${req.params.id} deleted.` });
-  } catch (error: any) {
-    return res.status(400).json({ message: error.message });
-  }
+  res.json({ message: "Deleted!" });
 };
