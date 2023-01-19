@@ -8,4 +8,4 @@
 
 5. npx mikro-orm database:create
 
-6. npx mikro-orm migration:up
+6. npx mikro-orm migration:fresh --seed

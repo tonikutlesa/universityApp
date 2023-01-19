@@ -27,6 +27,7 @@ const options: Options = {
   port: 5432,
   debug: true,
   migrations: { path: "dist/migrations", pathTs: "app/migrations" },
+  seeder: { path: "dist/seeders", pathTs: "app/seeders" },
 };
 
 export default options;
