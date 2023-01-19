@@ -1,13 +1,15 @@
 import type { EntityManager } from "@mikro-orm/core";
 import { Seeder } from "@mikro-orm/seeder";
-import { Majors } from "../entities/Majors";
-import { Students } from "../entities/Students";
-import { Departments } from "../entities/Departments";
-import { Courses } from "../entities/Courses";
-import { Enrollments } from "../entities/Enrollments";
-import { Professors } from "../entities/Professors";
-import { Exams } from "../entities/Exams";
-import { Results } from "../entities/Results";
+import {
+  Students,
+  Professors,
+  Courses,
+  Departments,
+  Enrollments,
+  Exams,
+  Majors,
+  Results,
+} from "../entities";
 import { v4 as uuidv4 } from "uuid";
 
 export class DatabaseSeeder extends Seeder {

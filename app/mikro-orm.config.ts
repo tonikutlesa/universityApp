@@ -1,12 +1,14 @@
 import { Options } from "@mikro-orm/core";
-import { Students } from "./entities/Students";
-import { Professors } from "./entities/Professors";
-import { Courses } from "./entities/Courses";
-import { Departments } from "./entities/Departments";
-import { Enrollments } from "./entities/Enrollments";
-import { Exams } from "./entities/Exams";
-import { Majors } from "./entities/Majors";
-import { Results } from "./entities/Results";
+import {
+  Students,
+  Professors,
+  Courses,
+  Departments,
+  Enrollments,
+  Exams,
+  Majors,
+  Results,
+} from "./entities";
 
 const options: Options = {
   type: "postgresql",

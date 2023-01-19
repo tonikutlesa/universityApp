@@ -1,9 +1,7 @@
 import { RequestHandler } from "express";
-import { Students } from "../entities/Students";
+import DI from "../app";
 
-import { DI } from "../server";
-
-export const createStudent: RequestHandler = async (req, res, next) => {
+const createStudent: RequestHandler = async (req, res, next) => {
   if (!req.body.name) {
     res.status(400).json({ message: "Name is missing" });
   }
@@ -18,16 +16,18 @@ export const createStudent: RequestHandler = async (req, res, next) => {
   }
 };
 
-export const getAllStudents: RequestHandler = async (req, res, next) => {
+const getAllStudents: RequestHandler = async (req, res, next) => {
   const students = await DI.studentsRepository.findAll();
 
   res.status(200).json(students);
 };
 
-export const updateStudent: RequestHandler = async (req, res, next) => {
+const updateStudent: RequestHandler = async (req, res, next) => {
   res.json({ message: "Updated!" });
 };
 
-export const deleteStudent: RequestHandler = async (req, res, next) => {
+const deleteStudent: RequestHandler = async (req, res, next) => {
   res.json({ message: "Deleted!" });
 };
+
+export default { createStudent, getAllStudents, updateStudent, deleteStudent };
