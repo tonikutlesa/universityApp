@@ -1,11 +1,19 @@
 import { Router } from "express";
-import controller from "../controllers/studentController";
+import studentController from "../controllers/studentController";
 
-const router = Router();
+const router = Router({ mergeParams: true });
 
-router.post("/", controller.createStudent);
-router.get("/", controller.getAllStudents);
-router.patch("/:id", controller.updateStudent);
-router.delete("/:id", controller.deleteStudent);
+router
+  .route("/")
+  .get(studentController.getAllStudents)
+  .post(studentController.createStudent);
+
+router
+  .route("/:id")
+  .get(studentController.getStudentById)
+  .put(studentController.updateStudent)
+  .delete(studentController.deleteStudent);
+
+router.route("/:id/enrollments").get(studentController.getStudentEnrollments);
 
 export default router;

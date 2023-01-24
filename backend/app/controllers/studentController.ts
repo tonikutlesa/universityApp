@@ -1,33 +1,78 @@
 import { RequestHandler } from "express";
+import { Enrollments } from "../entities";
+import crudController from "./crudController";
 import DI from "../app";
 
-const createStudent: RequestHandler = async (req, res, next) => {
-  if (!req.body.name) {
-    res.status(400).json({ message: "Name is missing" });
-  }
+const createStudent: RequestHandler = async (req, res) => {
+  await crudController.createInstance(DI.studentsRepository, req, res);
+};
 
+const getAllStudents: RequestHandler = async (req, res) => {
+  const populationArray: string[] = ["majorId"];
+
+  await crudController.getAll(DI.studentsRepository, populationArray, res);
+};
+
+const getStudentById: RequestHandler = async (req, res) => {
+  const populationArray: string[] = ["majorId"];
+  const filterQuery: Object = { studentId: req.params.id };
+
+  await crudController.getInstance(
+    DI.studentsRepository,
+    filterQuery,
+    populationArray,
+    req,
+    res
+  );
+};
+
+const updateStudent: RequestHandler = async (req, res) => {
+  const filterQuery = { studentId: req.params.id };
+
+  await crudController.updateInstance(
+    DI.studentsRepository,
+    filterQuery,
+    req,
+    res
+  );
+};
+
+const deleteStudent: RequestHandler = async (req, res) => {
+  const filterQuery = { studentId: req.params.id };
+
+  await crudController.deleteInstance(
+    DI.studentsRepository,
+    filterQuery,
+    req,
+    res
+  );
+};
+
+const getStudentEnrollments: RequestHandler = async (req, res) => {
   try {
-    const student = DI.studentsRepository.create(req.body);
-    await DI.studentsRepository.persist(student).flush();
+    const studentEnrollments = await DI.em.find(
+      Enrollments,
+      {
+        studentId: { studentId: req.params.id },
+      },
+      { populate: ["courseId"] }
+    );
 
-    res.json(student);
+    studentEnrollments.length
+      ? res
+          .status(200)
+          .json(studentEnrollments.map((enrollment) => enrollment.courseId))
+      : res.status(404).json({ message: "Student has no active enrollments" });
   } catch (error: any) {
-    return res.status(400).json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
 
-const getAllStudents: RequestHandler = async (req, res, next) => {
-  const students = await DI.studentsRepository.findAll();
-
-  res.status(200).json(students);
+export default {
+  createStudent,
+  getAllStudents,
+  updateStudent,
+  deleteStudent,
+  getStudentById,
+  getStudentEnrollments,
 };
-
-const updateStudent: RequestHandler = async (req, res, next) => {
-  res.json({ message: "Updated!" });
-};
-
-const deleteStudent: RequestHandler = async (req, res, next) => {
-  res.json({ message: "Deleted!" });
-};
-
-export default { createStudent, getAllStudents, updateStudent, deleteStudent };
