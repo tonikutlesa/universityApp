@@ -4,7 +4,12 @@ import { Students } from "./Students";
 
 @Entity()
 export class Results {
-  @ManyToOne({ entity: () => Students, fieldName: "student_id", primary: true })
+  @ManyToOne({
+    entity: () => Students,
+    fieldName: "student_id",
+    primary: true,
+    onDelete: "cascade",
+  })
   studentId!: Students;
 
   @ManyToOne({ entity: () => Exams, fieldName: "exam_id", primary: true })

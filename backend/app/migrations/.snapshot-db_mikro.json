@@ -455,6 +455,7 @@
             "student_id"
           ],
           "referencedTableName": "public.students",
+          "deleteRule": "cascade",
           "updateRule": "cascade"
         },
         "results_exam_id_foreign": {
@@ -518,6 +519,7 @@
             "student_id"
           ],
           "referencedTableName": "public.students",
+          "deleteRule": "cascade",
           "updateRule": "cascade"
         },
         "enrollments_course_id_foreign": {

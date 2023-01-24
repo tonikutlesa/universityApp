@@ -1,4 +1,10 @@
-import { Entity, ManyToOne, PrimaryKey, Property } from "@mikro-orm/core";
+import {
+  Cascade,
+  Entity,
+  ManyToOne,
+  PrimaryKey,
+  Property,
+} from "@mikro-orm/core";
 import { Majors } from "./Majors";
 
 @Entity()
@@ -18,6 +24,9 @@ export class Students {
   @Property({ length: 15 })
   phoneNumber!: string;
 
-  @ManyToOne({ entity: () => Majors, fieldName: "major_id" })
+  @ManyToOne({
+    entity: () => Majors,
+    fieldName: "major_id",
+  })
   majorId!: Majors;
 }
