@@ -1,4 +1,5 @@
 import { Options } from "@mikro-orm/core";
+import dotenv from "dotenv";
 import {
   Students,
   Professors,
@@ -9,6 +10,9 @@ import {
   Majors,
   Results,
 } from "./entities";
+
+dotenv.config();
+const host = process.env.host;
 
 const options: Options = {
   type: "postgresql",
@@ -25,7 +29,7 @@ const options: Options = {
   user: "postgres",
   password: "postgres",
   dbName: "db_mikro",
-  host: "localhost",
+  host: host,
   port: 5432,
   debug: true,
   migrations: { path: "dist/migrations", pathTs: "app/migrations" },

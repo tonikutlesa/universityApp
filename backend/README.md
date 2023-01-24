@@ -2,10 +2,8 @@
 
 2. npm install
 
-3. tsc
+3. npm run build
 
-4. npm start
+4. npm start:dev
 
-5. npx mikro-orm database:create
-
-6. npx mikro-orm migration:fresh --seed
+5. npm run migrate:seed
