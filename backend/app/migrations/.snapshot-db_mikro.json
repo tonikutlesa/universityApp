@@ -235,6 +235,7 @@
             "professor_id"
           ],
           "referencedTableName": "public.professors",
+          "deleteRule": "cascade",
           "updateRule": "cascade"
         }
       }
@@ -305,6 +306,7 @@
             "course_id"
           ],
           "referencedTableName": "public.courses",
+          "deleteRule": "cascade",
           "updateRule": "cascade"
         }
       }
@@ -468,6 +470,7 @@
             "exam_id"
           ],
           "referencedTableName": "public.exams",
+          "deleteRule": "cascade",
           "updateRule": "cascade"
         }
       }
@@ -532,6 +535,7 @@
             "course_id"
           ],
           "referencedTableName": "public.courses",
+          "deleteRule": "cascade",
           "updateRule": "cascade"
         }
       }

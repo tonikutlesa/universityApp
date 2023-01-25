@@ -12,7 +12,12 @@ export class Results {
   })
   studentId!: Students;
 
-  @ManyToOne({ entity: () => Exams, fieldName: "exam_id", primary: true })
+  @ManyToOne({
+    entity: () => Exams,
+    fieldName: "exam_id",
+    primary: true,
+    onDelete: "cascade",
+  })
   examId!: Exams;
 
   @Property()
