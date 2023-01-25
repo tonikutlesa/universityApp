@@ -64,7 +64,7 @@ const getStudentEnrollments: RequestHandler = async (req, res) => {
           .json(studentEnrollments.map((enrollment) => enrollment.courseId))
       : res.status(404).json({ message: "Student has no active enrollments" });
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
