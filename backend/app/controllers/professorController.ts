@@ -2,7 +2,6 @@ import { RequestHandler } from "express";
 import { Courses, Enrollments } from "../entities";
 import crudController from "./crudController";
 import DI from "../app";
-import options from "../mikro-orm.config";
 
 const createProfessor: RequestHandler = async (req, res) => {
   await crudController.createInstance(DI.professorsRepository, req, res);

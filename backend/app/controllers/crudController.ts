@@ -79,7 +79,7 @@ export const deleteInstance = async (
     await repository.removeAndFlush(instance);
 
     res.status(200).json({
-      message: `Resource with id: ${req.params.id} deleted successfully.`,
+      message: `Resource deleted successfully.`,
     });
   } catch (error: any) {
     res.status(400).json({ message: error.message });
