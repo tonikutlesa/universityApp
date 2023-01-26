@@ -12,6 +12,11 @@ export class Enrollments {
   })
   studentId!: Students;
 
-  @ManyToOne({ entity: () => Courses, fieldName: "course_id", primary: true })
+  @ManyToOne({
+    entity: () => Courses,
+    fieldName: "course_id",
+    primary: true,
+    onDelete: "cascade",
+  })
   courseId!: Courses;
 }

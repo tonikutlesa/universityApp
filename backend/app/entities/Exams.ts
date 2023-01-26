@@ -12,6 +12,10 @@ export class Exams {
   @Property({ length: 6, nullable: true })
   examDatetime?: Date;
 
-  @ManyToOne({ entity: () => Courses, fieldName: "course_id" })
+  @ManyToOne({
+    entity: () => Courses,
+    fieldName: "course_id",
+    onDelete: "cascade",
+  })
   courseId!: Courses;
 }

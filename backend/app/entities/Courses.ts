@@ -12,6 +12,10 @@ export class Courses {
   @Property()
   ects!: number;
 
-  @ManyToOne({ entity: () => Professors, fieldName: "professor_id" })
+  @ManyToOne({
+    entity: () => Professors,
+    fieldName: "professor_id",
+    onDelete: "cascade",
+  })
   professorId!: Professors;
 }
