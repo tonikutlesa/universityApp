@@ -18,6 +18,10 @@ export class Professors {
   @Property({ length: 15 })
   phoneNumber!: string;
 
-  @ManyToOne({ entity: () => Departments, fieldName: "deparment_id" })
+  @ManyToOne({
+    entity: () => Departments,
+    fieldName: "deparment_id",
+    onDelete: "cascade",
+  })
   deparmentId!: Departments;
 }

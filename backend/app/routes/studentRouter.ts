@@ -15,5 +15,6 @@ router
   .delete(studentController.deleteStudent);
 
 router.route("/:id/enrollments").get(studentController.getStudentEnrollments);
+router.route("/:id/results").get(studentController.getStudentResults);
 
 export default router;

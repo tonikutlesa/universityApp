@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { Enrollments } from "../entities";
+import { Enrollments, Results } from "../entities";
 import crudController from "./crudController";
 import DI from "../app";
 
@@ -68,6 +68,24 @@ const getStudentEnrollments: RequestHandler = async (req, res) => {
   }
 };
 
+const getStudentResults: RequestHandler = async (req, res) => {
+  try {
+    const studentResults = await DI.em.find(
+      Results,
+      {
+        studentId: { studentId: req.params.id },
+      },
+      { populate: ["examId", "examId.courseId"] }
+    );
+
+    studentResults.length
+      ? res.status(200).json({ studentResults })
+      : res.status(404).json({ message: "Student has no active enrollments" });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export default {
   createStudent,
   getAllStudents,
@@ -75,4 +93,5 @@ export default {
   deleteStudent,
   getStudentById,
   getStudentEnrollments,
+  getStudentResults,
 };

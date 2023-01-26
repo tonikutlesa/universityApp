@@ -166,6 +166,7 @@
             "deparment_id"
           ],
           "referencedTableName": "public.departments",
+          "deleteRule": "cascade",
           "updateRule": "cascade"
         }
       }
