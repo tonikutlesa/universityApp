@@ -11,11 +11,13 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import { useUserStore } from "../store/user";
 
 const theme = createTheme();
 
 export default function Register() {
   const navigate = useNavigate();
+  const signIn = useUserStore((state) => state.signIn);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -28,6 +30,7 @@ export default function Register() {
 
   const handleButtonClick = (event) => {
     event.preventDefault();
+    signIn();
     navigate("/");
   };
 

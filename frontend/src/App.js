@@ -3,13 +3,7 @@ import Header from "./components/Header";
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import { create } from "zustand";
-
-const useUserStore = create((set) => ({
-  isSignedIn: false,
-  signIn: () => set((state) => ({ isSignedIn: true })),
-  signOut: () => set((state) => ({ isSignedIn: false })),
-}));
+import StudentsList from "./components/StudentsList";
 
 const App = () => {
   return (
@@ -18,10 +12,10 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/students" element={<StudentsList />} />
       </Routes>
     </div>
   );
 };
 
 export default App;
-export { useUserStore };

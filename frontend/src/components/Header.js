@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
-import { useUserStore } from "../App";
+import { useUserStore } from "../store/user";
 
 const pages = ["Students", "Professors"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];

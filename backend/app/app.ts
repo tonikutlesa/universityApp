@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import router from "./routes/mainRouter";
+import cors from "cors";
 import { RequestContext } from "@mikro-orm/core";
 import { DI, initMikroORM } from "./mikro-orm";
 
@@ -12,6 +13,7 @@ initMikroORM();
 
 const app = express();
 app.use(express.json());
+app.use(cors({ origin: "http://localhost:3000" }));
 app.use((req, res, next) => RequestContext.create(DI.orm.em, next));
 app.use("/", router);
 
