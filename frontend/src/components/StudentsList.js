@@ -10,14 +10,14 @@ import Paper from "@mui/material/Paper";
 import { useStudentsStore } from "../store/students";
 
 const StudentsList = () => {
-  const { students, fetchStudents } = useStudentsStore((state) => ({
+  const { students, fetchAllStudents } = useStudentsStore((state) => ({
     students: state.students,
-    fetchStudents: state.fetchStudents,
+    fetchAllStudents: state.fetchAllStudents,
   }));
 
   useEffect(() => {
-    fetchStudents("http://localhost:8000/students/");
-  }, [fetchStudents]);
+    fetchAllStudents("http://localhost:8000/students/");
+  }, [fetchAllStudents]);
 
   return (
     <TableContainer component={Paper}>
